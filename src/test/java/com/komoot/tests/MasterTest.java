@@ -69,9 +69,8 @@ public abstract class MasterTest {
 	public static String getUrl() {
 		return properties.get(getEnvironmentName() + ".url").toString();
 	}
-
+	
 	public static <T> Iterator<T> getDataProviderContent(String resourceName, Class<? extends T> className) throws IOException, CsvException  {
-
 		ColumnPositionMappingStrategy<T> strategy = new ColumnPositionMappingStrategy<T>();
 		strategy.setType(className);        
 		strategy.setColumnMapping(LanguageBean.getHeaders());
