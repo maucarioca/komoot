@@ -2,7 +2,7 @@ package com.komoot.beans;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class LanguageBean {
+public class LanguageBean extends MasterBean {
 
 	@CsvBindByName(column = "languageValue", required = true)
 	private String languageValue;
@@ -10,20 +10,11 @@ public class LanguageBean {
 	@CsvBindByName(column = "expectedTitle", required = true)
 	private String expectedTitle;
 
-	public static String[] getHeaders(){
-		return new String[] {"languageValue","expectedTitle"};
-	}
-
 	public String getLanguageValue() {
 		return languageValue;
 	}
 
 	public String getExpectedTitle() {
 		return expectedTitle;
-	}
-	
-	@Override
-	public String toString() {
-		return "[languageValue:" + getLanguageValue() + ", expectedTitle:" + getExpectedTitle() + "]";
 	}
 }

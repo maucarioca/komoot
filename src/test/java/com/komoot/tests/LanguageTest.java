@@ -29,8 +29,8 @@ public class LanguageTest extends MasterTest {
 	}
 
 	@Test (dataProvider="language_test_data_provider")
-	public void changeLanguage(LanguageBean language)  {
+	public void changeLanguage(LanguageBean languageBean)  {
 		homePage.navigateTo(getUrl());
-		assertThat(driver.getTitle(), CoreMatchers.equalTo(language.getExpectedTitle()));
+		assertThat(driver.getTitle(), CoreMatchers.equalTo(languageBean.getExpectedTitle()));
 	}
 }
