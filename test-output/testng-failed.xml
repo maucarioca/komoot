@@ -5,7 +5,7 @@
     <classes>
       <class name="com.komoot.tests.LanguageTest">
         <methods>
-          <include name="changeLanguage" invocation-numbers="0 1"/>
+          <include name="changeLanguage" invocation-numbers="0"/>
           <include name="setupClass"/>
           <include name="tearDownClass"/>
           <include name="setUpPages"/>
