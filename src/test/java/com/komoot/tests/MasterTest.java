@@ -63,9 +63,9 @@ public abstract class MasterTest {
 		System.setProperty("webdriver.ie.driver", "drivers\\ie\\IEDriverServer.exe");
 		DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 		capabilities.setCapability("ie.enableFullPageScreenshot", false);
-		capabilities.setCapability("requireWindowFocus", true);
-		capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,
-				Boolean.valueOf(System.getProperty("IGNORE_SECURITY_DOMAINS", "false")));
+		capabilities.setCapability("ignoreProtectedModeSettings", true);
+		capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
+		capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 		InternetExplorerOptions options = new InternetExplorerOptions();
 		options.requireWindowFocus();
 		options.merge(capabilities);
