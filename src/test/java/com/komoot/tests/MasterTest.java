@@ -27,6 +27,8 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.exceptions.CsvException;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public abstract class MasterTest {
 
 	protected static Class<?> browserClass;
@@ -59,8 +61,10 @@ public abstract class MasterTest {
 	}
 
 	private static void provideIEBrowser() throws IOException {
-		Runtime.getRuntime().exec("taskkill /im IEDriverServer.exe /f");
-		System.setProperty("webdriver.ie.driver", "drivers\\ie\\IEDriverServer.exe");
+		//Runtime.getRuntime().exec("taskkill /im IEDriverServer.exe /f");
+		//System.setProperty("webdriver.ie.driver", "drivers\\ie\\IEDriverServer.exe");
+		WebDriverManager.iedriver().clearPreferences();
+		WebDriverManager.iedriver().setup();
 		DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 		capabilities.setCapability("ie.enableFullPageScreenshot", false);
 		capabilities.setCapability("ignoreProtectedModeSettings", true);
@@ -73,8 +77,11 @@ public abstract class MasterTest {
 	}
 
 	private static void provideChromeBrowser() throws  IOException {
-		Runtime.getRuntime().exec("taskkill /im chromedriver.exe /f");
-		System.setProperty("webdriver.chrome.driver", "drivers\\chrome\\chromedriver.exe");
+		//Runtime.getRuntime().exec("taskkill /im chromedriver.exe /f");
+		//System.setProperty("webdriver.chrome.driver", "drivers\\chrome\\chromedriver.exe");
+		WebDriverManager.chromedriver().clearPreferences();
+		WebDriverManager.chromedriver().setup();
+		System.out.println(System.getProperty("webdriver.chrome.driver"));
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--test-type");
 		options.addArguments("--disable-popup-blocking");
@@ -87,8 +94,10 @@ public abstract class MasterTest {
 	}
 
 	private static void provideFirefoxBrowser() throws IOException {
-		Runtime.getRuntime().exec("taskkill /im geckodriver.exe /f");
-		System.setProperty("webdriver.gecko.driver", "drivers\\firefox\\geckodriver.exe");
+		//Runtime.getRuntime().exec("taskkill /im geckodriver.exe /f");
+		//System.setProperty("webdriver.gecko.driver", "drivers\\firefox\\geckodriver.exe");
+		WebDriverManager.firefoxdriver().clearPreferences();
+		WebDriverManager.firefoxdriver().setup();
 		FirefoxOptions options = new FirefoxOptions();
 		options.setCapability("marionette", true);
 		options.setCapability("browser.download.folderList", 2); 
