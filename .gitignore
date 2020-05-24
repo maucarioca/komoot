@@ -24,7 +24,7 @@ gradle-app.setting
 
 ### TesnNG ###
 #Test Report Folder
-test-output
+/test-output/
 
 ### Other ###
-drivers
+/drivers/
