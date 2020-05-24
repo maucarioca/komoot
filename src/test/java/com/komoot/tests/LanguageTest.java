@@ -26,11 +26,12 @@ public class LanguageTest extends MasterTest {
 	@BeforeClass
 	public void setUpPages() {
 		homePage = HomePage.getInstance(getDriver());
+		homePage.navigateTo(getUrl());
 	}
 
 	@Test (dataProvider="language_test_data_provider")
 	public void changeLanguage(LanguageBean languageBean)  {
-		homePage.navigateTo(getUrl());
-		assertThat(driver.getTitle(), CoreMatchers.equalTo(languageBean.getExpectedTitle()));
+		homePage.selectLanguage(languageBean.getLanguageValue());
+		assertThat(driver.getCurrentUrl(), CoreMatchers.equalTo(languageBean.getExpectedUrl()));
 	}
 }

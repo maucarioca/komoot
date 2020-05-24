@@ -6,9 +6,17 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.util.ResourceUtils;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -20,7 +28,6 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.exceptions.CsvException;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.config.DriverManagerType;
 
 public abstract class MasterTest {
 
@@ -41,17 +48,58 @@ public abstract class MasterTest {
 			driver.quit();
 	}
 
-	private static void provideBrowser() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		DriverManagerType driverManagerType = null;
+	private static void provideBrowser() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
 		if (StringUtils.equalsAny(getBrowserName(), "gc", "chrome","googlechrome","google_chrome","gchrome")) {
-			driverManagerType = DriverManagerType.CHROME;	
+			provideChromeBrowser();	
 		} else if (StringUtils.equalsAny(getBrowserName(), "ff", "firefox","mozilla","mozilla_firefox","mozillafirefox")) {
-			driverManagerType = DriverManagerType.FIREFOX;
-		}	
-		WebDriverManager.getInstance(driverManagerType).setup();
-		browserClass =  Class.forName(driverManagerType.browserClass());
-		driver = (WebDriver) browserClass.newInstance();
+			provideFirefoxBrowser();
+		}	else if (StringUtils.equalsAny(getBrowserName(), "ie", "iexplore","internetexplorer","internet_explorer")) {
+			provideIEBrowser();
+		}
+		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
+	}
+
+	private static void provideIEBrowser() throws IOException {
+		Runtime.getRuntime().exec("taskkill /im IEDriverServer.exe /f");
+		WebDriverManager.iedriver().clearPreferences();
+		WebDriverManager.iedriver().setup();
+		DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+		capabilities.setCapability("ie.enableFullPageScreenshot", false);
+		capabilities.setCapability("ignoreProtectedModeSettings", true);
+		capabilities.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
+		capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+		InternetExplorerOptions options = new InternetExplorerOptions();
+		options.requireWindowFocus();
+		options.merge(capabilities);
+		driver = new InternetExplorerDriver(options);
+	}
+
+	private static void provideChromeBrowser() throws  IOException {
+		Runtime.getRuntime().exec("taskkill /im chromedriver.exe /f");
+		WebDriverManager.chromedriver().clearPreferences();
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--test-type");
+		options.addArguments("--disable-popup-blocking");
+		options.addArguments("--disable-gpu");
+		DesiredCapabilities chrome = DesiredCapabilities.chrome();
+		chrome.setJavascriptEnabled(true);
+		options.setCapability(ChromeOptions.CAPABILITY, options);
+		driver = new ChromeDriver(options);
+	}
+
+	private static void provideFirefoxBrowser() throws IOException {
+		Runtime.getRuntime().exec("taskkill /im geckodriver.exe /f");
+		WebDriverManager.firefoxdriver().clearPreferences();
+		WebDriverManager.firefoxdriver().setup();
+		FirefoxOptions options = new FirefoxOptions();
+		options.setCapability("marionette", true);
+		options.setCapability("browser.download.folderList", 2); 
+		options.setCapability("browser.download.manager.showWhenStarting", false);
+		options.setCapability("browser.helperApps.neverAsk.saveToDisk", true);
+		options.setCapability("browser.privatebrowsing.autostart", true);
+		driver = new FirefoxDriver(options);
 	}
 
 	public static WebDriver getDriver() {
@@ -69,7 +117,7 @@ public abstract class MasterTest {
 	public static String getUrl() {
 		return properties.get(getEnvironmentName() + ".url").toString();
 	}
-	
+
 	public static <T> Iterator<T> getDataProviderContent(String resourceName, Class<? extends T> className) throws IOException, CsvException  {
 		ColumnPositionMappingStrategy<T> strategy = new ColumnPositionMappingStrategy<T>();
 		strategy.setType(className);        

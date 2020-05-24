@@ -21,3 +21,10 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
+
+### TesnNG ###
+#Test Report Folder
+/test-output/
+
+### Other ###
+/drivers/
