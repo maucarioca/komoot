@@ -61,7 +61,8 @@ public abstract class MasterTest {
 	}
 
 	private static void provideIEBrowser() throws IOException {
-		//Runtime.getRuntime().exec("taskkill /im IEDriverServer.exe /f");
+		Runtime.getRuntime().exec("taskkill /im IEDriverServer.exe /f");
+		//Used for local purposes
 		//System.setProperty("webdriver.ie.driver", "drivers\\ie\\IEDriverServer.exe");
 		WebDriverManager.iedriver().clearPreferences();
 		WebDriverManager.iedriver().setup();
@@ -77,7 +78,8 @@ public abstract class MasterTest {
 	}
 
 	private static void provideChromeBrowser() throws  IOException {
-		//Runtime.getRuntime().exec("taskkill /im chromedriver.exe /f");
+		Runtime.getRuntime().exec("taskkill /im chromedriver.exe /f");
+		//Used for local purposes
 		//System.setProperty("webdriver.chrome.driver", "drivers\\chrome\\chromedriver.exe");
 		WebDriverManager.chromedriver().clearPreferences();
 		WebDriverManager.chromedriver().setup();
@@ -94,7 +96,8 @@ public abstract class MasterTest {
 	}
 
 	private static void provideFirefoxBrowser() throws IOException {
-		//Runtime.getRuntime().exec("taskkill /im geckodriver.exe /f");
+		Runtime.getRuntime().exec("taskkill /im geckodriver.exe /f");
+		//Used for local purposes
 		//System.setProperty("webdriver.gecko.driver", "drivers\\firefox\\geckodriver.exe");
 		WebDriverManager.firefoxdriver().clearPreferences();
 		WebDriverManager.firefoxdriver().setup();
