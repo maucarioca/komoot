@@ -6,15 +6,15 @@ public class LanguageBean extends MasterBean {
 
 	@CsvBindByName(column = "languageValue", required = true)
 	private String languageValue;
-
-	@CsvBindByName(column = "expectedTitle", required = true)
-	private String expectedTitle;
+	
+	@CsvBindByName(column = "expectedUrl", required = true)
+	private String expectedUrl;
 
 	public String getLanguageValue() {
 		return languageValue;
 	}
 
-	public String getExpectedTitle() {
-		return expectedTitle;
+	public String getExpectedUrl() {
+		return expectedUrl;
 	}
 }

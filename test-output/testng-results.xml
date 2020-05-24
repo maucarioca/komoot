@@ -1,43 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" ignored="0" total="6" passed="6">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="6111" started-at="2020-05-23T17:56:39Z" finished-at="2020-05-23T17:56:46Z">
+  <suite name="Default suite" duration-ms="33345" started-at="2020-05-24T14:31:20Z" finished-at="2020-05-24T14:31:53Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="6111" started-at="2020-05-23T17:56:39Z" finished-at="2020-05-23T17:56:46Z">
+    <test name="Default test" duration-ms="33345" started-at="2020-05-24T14:31:20Z" finished-at="2020-05-24T14:31:53Z">
       <class name="com.komoot.tests.LanguageTest">
-        <test-method status="PASS" signature="setupClass()[pri:0, instance:com.komoot.tests.LanguageTest@4b44655e]" name="setupClass" is-config="true" duration-ms="6224" started-at="2020-05-23T17:56:33Z" finished-at="2020-05-23T17:56:39Z">
+        <test-method status="PASS" signature="setupClass()[pri:0, instance:com.komoot.tests.LanguageTest@501edcf1]" name="setupClass" is-config="true" duration-ms="7632" started-at="2020-05-24T14:31:12Z" finished-at="2020-05-24T14:31:20Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupClass -->
-        <test-method status="PASS" signature="setUpPages()[pri:0, instance:com.komoot.tests.LanguageTest@4b44655e]" name="setUpPages" is-config="true" duration-ms="19" started-at="2020-05-23T17:56:39Z" finished-at="2020-05-23T17:56:39Z">
+        <test-method status="PASS" signature="setUpPages()[pri:0, instance:com.komoot.tests.LanguageTest@501edcf1]" name="setUpPages" is-config="true" duration-ms="5721" started-at="2020-05-24T14:31:20Z" finished-at="2020-05-24T14:31:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpPages -->
-        <test-method status="PASS" signature="changeLanguage(com.komoot.beans.LanguageBean)[pri:0, instance:com.komoot.tests.LanguageTest@4b44655e]" name="changeLanguage" duration-ms="4794" started-at="2020-05-23T17:56:40Z" data-provider="language_test_data_provider" finished-at="2020-05-23T17:56:44Z">
+        <test-method status="PASS" signature="changeLanguage(com.komoot.beans.LanguageBean)[pri:0, instance:com.komoot.tests.LanguageTest@501edcf1]" name="changeLanguage" duration-ms="3135" started-at="2020-05-24T14:31:26Z" data-provider="language_test_data_provider" finished-at="2020-05-24T14:31:29Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[com.komoot.beans.LanguageBean@773f7880[expectedTitle=Komoot | Better Planning and Navigation for Hikers and Bikers,languageValue=English]]]>
+                <![CDATA[com.komoot.beans.LanguageBean@4233e892[expectedUrl=https://www.komoot.fr/,languageValue=Français]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- changeLanguage -->
-        <test-method status="PASS" signature="changeLanguage(com.komoot.beans.LanguageBean)[pri:0, instance:com.komoot.tests.LanguageTest@4b44655e]" name="changeLanguage" duration-ms="1109" started-at="2020-05-23T17:56:44Z" data-provider="language_test_data_provider" finished-at="2020-05-23T17:56:46Z">
+        <test-method status="PASS" signature="changeLanguage(com.komoot.beans.LanguageBean)[pri:0, instance:com.komoot.tests.LanguageTest@501edcf1]" name="changeLanguage" duration-ms="5571" started-at="2020-05-24T14:31:29Z" data-provider="language_test_data_provider" finished-at="2020-05-24T14:31:34Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[com.komoot.beans.LanguageBean@4ba534b0[expectedTitle=Komoot | Better Planning and Navigation for Hikers and Bikers,languageValue=English]]]>
+                <![CDATA[com.komoot.beans.LanguageBean@5b057c8c[expectedUrl=https://www.komoot.de/,languageValue=Deutsch]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- changeLanguage -->
-        <test-method status="PASS" signature="tearDownClass()[pri:0, instance:com.komoot.tests.LanguageTest@4b44655e]" name="tearDownClass" is-config="true" duration-ms="723" started-at="2020-05-23T17:56:46Z" finished-at="2020-05-23T17:56:46Z">
+        <test-method status="PASS" signature="changeLanguage(com.komoot.beans.LanguageBean)[pri:0, instance:com.komoot.tests.LanguageTest@501edcf1]" name="changeLanguage" duration-ms="6399" started-at="2020-05-24T14:31:34Z" data-provider="language_test_data_provider" finished-at="2020-05-24T14:31:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[com.komoot.beans.LanguageBean@35beb15e[expectedUrl=https://www.komoot.it/,languageValue=Italiano]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- changeLanguage -->
+        <test-method status="PASS" signature="changeLanguage(com.komoot.beans.LanguageBean)[pri:0, instance:com.komoot.tests.LanguageTest@501edcf1]" name="changeLanguage" duration-ms="4328" started-at="2020-05-24T14:31:41Z" data-provider="language_test_data_provider" finished-at="2020-05-24T14:31:45Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[com.komoot.beans.LanguageBean@e24ddd0[expectedUrl=https://www.komoot.es/,languageValue=Español]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- changeLanguage -->
+        <test-method status="PASS" signature="changeLanguage(com.komoot.beans.LanguageBean)[pri:0, instance:com.komoot.tests.LanguageTest@501edcf1]" name="changeLanguage" duration-ms="4149" started-at="2020-05-24T14:31:45Z" data-provider="language_test_data_provider" finished-at="2020-05-24T14:31:49Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[com.komoot.beans.LanguageBean@2a2bb0eb[expectedUrl=https://www.komoot.nl/,languageValue=Nederlands]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- changeLanguage -->
+        <test-method status="PASS" signature="changeLanguage(com.komoot.beans.LanguageBean)[pri:0, instance:com.komoot.tests.LanguageTest@501edcf1]" name="changeLanguage" duration-ms="3758" started-at="2020-05-24T14:31:49Z" data-provider="language_test_data_provider" finished-at="2020-05-24T14:31:53Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[com.komoot.beans.LanguageBean@4163f1cd[expectedUrl=https://www.komoot.com/,languageValue=English]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- changeLanguage -->
+        <test-method status="PASS" signature="tearDownClass()[pri:0, instance:com.komoot.tests.LanguageTest@501edcf1]" name="tearDownClass" is-config="true" duration-ms="2436" started-at="2020-05-24T14:31:53Z" finished-at="2020-05-24T14:31:55Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
