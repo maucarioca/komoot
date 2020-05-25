@@ -31,8 +31,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public abstract class MasterTest {
 
-	protected static Class<?> browserClass;
-	protected static WebDriver driver;
+	private static WebDriver driver;
 	private static Properties properties;
 
 	@BeforeSuite
@@ -44,8 +43,8 @@ public abstract class MasterTest {
 
 	@AfterSuite(alwaysRun = true)
 	public static void tearDownClass() throws ClassNotFoundException {
-		if (!Objects.isNull(driver))
-			driver.quit();
+		if (!Objects.isNull(getDriver()))
+			getDriver().quit();
 	}
 
 	private static void provideBrowser() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
@@ -56,8 +55,8 @@ public abstract class MasterTest {
 		}	else if (StringUtils.equalsAny(getBrowserName(), "ie", "iexplore","internetexplorer","internet_explorer")) {
 			provideIEBrowser();
 		}
-		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
+		getDriver().manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		getDriver().manage().window().maximize();
 	}
 
 	private static void provideIEBrowser() throws IOException {
@@ -72,7 +71,7 @@ public abstract class MasterTest {
 		InternetExplorerOptions options = new InternetExplorerOptions();
 		options.requireWindowFocus();
 		options.merge(capabilities);
-		driver = new InternetExplorerDriver(options);
+		setDriver(new InternetExplorerDriver(options));
 	}
 
 	private static void provideChromeBrowser() throws  IOException {
@@ -86,7 +85,7 @@ public abstract class MasterTest {
 		DesiredCapabilities chrome = DesiredCapabilities.chrome();
 		chrome.setJavascriptEnabled(true);
 		options.setCapability(ChromeOptions.CAPABILITY, options);
-		driver = new ChromeDriver(options);
+		setDriver(new ChromeDriver(options));
 	}
 
 	private static void provideFirefoxBrowser() throws IOException {
@@ -99,7 +98,11 @@ public abstract class MasterTest {
 		options.setCapability("browser.download.manager.showWhenStarting", false);
 		options.setCapability("browser.helperApps.neverAsk.saveToDisk", true);
 		options.setCapability("browser.privatebrowsing.autostart", true);
-		driver = new FirefoxDriver(options);
+		setDriver(new FirefoxDriver(options));
+	}
+
+	private static void setDriver(WebDriver driver) {
+		MasterTest.driver = driver;
 	}
 
 	public static WebDriver getDriver() {

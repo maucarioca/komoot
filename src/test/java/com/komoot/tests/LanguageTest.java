@@ -6,13 +6,16 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import org.hamcrest.CoreMatchers;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.komoot.beans.LanguageBean;
 import com.komoot.pageobjects.HomePage;
 import com.opencsv.exceptions.CsvException;
+
+import util.WebDriverUtils;
 
 public class LanguageTest extends MasterTest {
 
@@ -23,15 +26,20 @@ public class LanguageTest extends MasterTest {
 		return getDataProviderContent("language_test_data.csv", LanguageBean.class);
 	}
 
-	@BeforeClass
-	public void setUpPages() {
+	@BeforeTest
+	public void setUpTest() {
+		WebDriverUtils.navigateTo(getDriver(),getUrl());
 		homePage = HomePage.getInstance(getDriver());
-		homePage.navigateTo(getUrl());
 	}
 
 	@Test (dataProvider="language_test_data_provider")
 	public void changeLanguage(LanguageBean languageBean)  {
 		homePage.selectLanguage(languageBean.getLanguageValue());
-		assertThat(driver.getCurrentUrl(), CoreMatchers.equalTo(languageBean.getExpectedUrl()));
+		assertThat(homePage.getPageCurrentUrl(), CoreMatchers.equalTo(languageBean.getExpectedUrl()));
+	}
+
+	@AfterTest
+	public void tearDownTest(){
+		homePage = null;
 	}
 }
