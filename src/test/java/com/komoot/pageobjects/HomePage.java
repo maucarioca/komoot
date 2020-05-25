@@ -1,49 +1,44 @@
 package com.komoot.pageobjects;
 
-import java.util.List;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.komoot.pageobjects.widgets.MenuBarWidget;
+
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import util.WebDriverUtils;
 
 public class HomePage extends MasterPage {
 
-	private static HomePage homePage;
+	private static HomePage homePage = null;
 
-	@FindBy(xpath = "//span[@class='tw-font-bold tw-mr-1']")
-	private WebElement selectionLanguage;
-
-	@FindBy(xpath = "//a[@data-name='locale']")
-	private List<WebElement> languageItems;
+	@FindBy(xpath="//div[@class='print:tw-hidden']")
+	private MenuBarWidget menuBarWidget;
 
 	private HomePage(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
 	}
 
 	public static HomePage getInstance(WebDriver driver) {
-		if (homePage == null) 
-			homePage = new HomePage(driver); 
-
+		if (homePage == null) {
+			homePage = new HomePage(driver);
+			PageFactory.initElements(new AppiumFieldDecorator(getDriver()), homePage);
+		}
 		return homePage; 
 	}
 
 	public void selectLanguage(String languageValue) {
-		waitForElementToBeClickable(selectionLanguage).click();
-		for(WebElement element : languageItems) {
-			if (element.getText().contentEquals(languageValue)) {
-				waitForElementToBeClickable(element).click();
-				waitForLoad();
-				break;
-			}
+		WebDriverUtils.clickJs(getDriver(), homePage.menuBarWidget.getSelectionLanguage());
+		WebDriverUtils.click(getDriver(), homePage.menuBarWidget.getLanguageItemElement(languageValue));
+		WebDriverUtils.waitForLoad(getDriver());
+		if (!languageValue.contentEquals("English")) {
+			WebDriverUtils.sleep(5000);
+			WebDriverUtils.click(getDriver(), homePage.menuBarWidget.getBtnNoSwitchLanguage());
 		}
 	}
 
-	public void navigateTo(String url) {
-		getDriver().get(url);
-		waitForLoad();
+	public MenuBarWidget getMenuBarWidget(WebDriver driver) {
+		return menuBarWidget;
 	}
 }
