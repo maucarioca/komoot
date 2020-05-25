@@ -37,7 +37,7 @@ public class RoutePlannerTests extends MasterTests {
 		WebDriverUtils.waitForLoad(getDriver());
 	}
 
-	@Test (dataProvider="place_on_map_test_data_provider")
+	@Test (groups="routePlannerTests", dataProvider="place_on_map_test_data_provider")
 	public void checkExpectedPlacesInTheMap(PlaceOnMapBean placeItem)  {
 		WebDriverUtils.click(getDriver(), routePlannerPage.getTxtSearchForPlaceOrAddress());
 		WebDriverUtils.waitElementBeVisible(getDriver(), routePlannerPage.getPlacesOnMampWidget().getWrappedElement());

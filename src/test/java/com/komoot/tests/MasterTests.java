@@ -43,8 +43,8 @@ public abstract class MasterTests {
 	@AfterSuite(alwaysRun = true)
 	public static void tearDownClass() throws ClassNotFoundException {
 		if (getDriver() != null) {
-			getDriver().quit();
 			getDriver().close();
+			getDriver().quit();
 		}
 	}
 

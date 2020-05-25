@@ -43,8 +43,17 @@ dependencies {
 	compile group: 'com.opencsv', name: 'opencsv', version: '5.1'	
 }
 
+def getDate() {
+    return new Date().format('yyyyMMdd_HHmmss')
+}
+
 test {
 	useTestNG(){
-		suites 'komoot_tests.xml'
+		suites 'src/test/resources/com/komoot/testng/xml/komoot_tests.xml'
+		//set TestNG output dir
+        outputDirectory = file("$projectDir/testNG_Reports/" + getDate())
+		useDefaultListeners = true
+		 // turn off Gradle's HTML report
+		reports.html.enabled = false
 	}
 }

@@ -1,0 +1,1 @@
+START /WAIT gradlew clean build test
