@@ -17,13 +17,13 @@ import com.opencsv.exceptions.CsvException;
 
 import util.WebDriverUtils;
 
-public class LanguageTest extends MasterTest {
-
+public class LanguageTests extends MasterTests {
+	
 	private HomePage homePage;
 
 	@DataProvider(name = "language_test_data_provider")
 	public Iterator<LanguageBean> languageTestDataProvider() throws IOException, CsvException, NoSuchFieldException, SecurityException {
-		return getDataProviderContent("language_test_data.csv", LanguageBean.class);
+		return getDataProviderContent("language_test_data.csv", new LanguageBean());
 	}
 
 	@BeforeTest

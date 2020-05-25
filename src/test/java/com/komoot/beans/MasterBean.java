@@ -8,13 +8,13 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public abstract class MasterBean {
 	
-	public static String[] getHeaders(){
+	public String[] getHeaders(){
 		List<String> fieldNames = getFieldNames();
 		return fieldNames.stream().toArray(String[]::new);
 	}
 
-	private static List<String> getFieldNames() {
-		Field[] fields = LanguageBean.class.getDeclaredFields();
+	private List<String> getFieldNames() {
+		Field[] fields = this.getClass().getDeclaredFields();
 		List<String> fieldNames = new ArrayList<>();
 		for (Field field : fields)
 			fieldNames.add(field.getName());
@@ -25,5 +25,4 @@ public abstract class MasterBean {
 	public String toString(){
 		return ToStringBuilder.reflectionToString(this);
 	}
-
 }
