@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="LanguageTests">
+    <classes>
+      <class name="com.komoot.tests.LanguageTests"/>
+    </classes>
+  </test> <!-- Test -->
+   <test name="RoutePlannerTests">
+    <classes>
+      <class name="com.komoot.tests.RoutePlannerTests"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
