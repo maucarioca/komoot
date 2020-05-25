@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +20,7 @@ import org.springframework.util.ResourceUtils;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import com.komoot.beans.LanguageBean;
+import com.komoot.beans.MasterBean;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -29,7 +28,7 @@ import com.opencsv.exceptions.CsvException;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public abstract class MasterTest {
+public abstract class MasterTests {
 
 	private static WebDriver driver;
 	private static Properties properties;
@@ -43,8 +42,10 @@ public abstract class MasterTest {
 
 	@AfterSuite(alwaysRun = true)
 	public static void tearDownClass() throws ClassNotFoundException {
-		if (!Objects.isNull(getDriver()))
+		if (getDriver() != null) {
 			getDriver().quit();
+			getDriver().close();
+		}
 	}
 
 	private static void provideBrowser() throws ClassNotFoundException, InstantiationException, IllegalAccessException, IOException {
@@ -102,7 +103,7 @@ public abstract class MasterTest {
 	}
 
 	private static void setDriver(WebDriver driver) {
-		MasterTest.driver = driver;
+		MasterTests.driver = driver;
 	}
 
 	public static WebDriver getDriver() {
@@ -121,12 +122,12 @@ public abstract class MasterTest {
 		return properties.get(getEnvironmentName() + ".url").toString();
 	}
 
-	public static <T> Iterator<T> getDataProviderContent(String resourceName, Class<? extends T> className) throws IOException, CsvException  {
+	public static <T> Iterator<T> getDataProviderContent(String resourceName, MasterBean bean) throws IOException, CsvException  {
 		ColumnPositionMappingStrategy<T> strategy = new ColumnPositionMappingStrategy<T>();
-		strategy.setType(className);        
-		strategy.setColumnMapping(LanguageBean.getHeaders());
+		strategy.setType((Class<? extends T>) bean.getClass());        
+		strategy.setColumnMapping(bean.getHeaders());
 
-		File file = ResourceUtils.getFile(MasterTest.class.getClassLoader().getResource("testdata/" + resourceName));
+		File file = ResourceUtils.getFile(MasterTests.class.getClassLoader().getResource("testdata/" + resourceName));
 
 		CsvToBean<T> csvToBean = new CsvToBeanBuilder<T>(new FileReader(file.getAbsolutePath()))
 				.withMappingStrategy(strategy)

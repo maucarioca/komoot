@@ -37,8 +37,8 @@ public class HomePage extends MasterPage {
 			WebDriverUtils.click(getDriver(), homePage.menuBarWidget.getBtnNoSwitchLanguage());
 		}
 	}
-
-	public MenuBarWidget getMenuBarWidget(WebDriver driver) {
+	
+	public MenuBarWidget getMenuBarWidget() {
 		return menuBarWidget;
 	}
 }
