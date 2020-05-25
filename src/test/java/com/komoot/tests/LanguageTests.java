@@ -32,8 +32,8 @@ public class LanguageTests extends MasterTests {
 		homePage = HomePage.getInstance(getDriver());
 	}
 
-	@Test (dataProvider="language_test_data_provider")
-	public void changeLanguage(LanguageBean languageBean)  {
+	@Test (groups="languageTests", dataProvider="language_test_data_provider")
+	public void changeLanguageAndCheckUrl(LanguageBean languageBean)  {
 		homePage.selectLanguage(languageBean.getLanguageValue());
 		assertThat(homePage.getPageCurrentUrl(), CoreMatchers.equalTo(languageBean.getExpectedUrl()));
 	}
