@@ -18,3 +18,29 @@ The requirements for a successfully finished task are:
 - Your code can be executed according to the the documentation in the README.MD
 - Tests are all green, unless there is a bug in the app.
 
+############################################################################################################################################################
+# Instructions
+
+1) Requirements:
+- Windows machine;
+- Google Chrome installed (if want to run with Chrome);
+- Firefox installed (if you want to run with Firefox).
+
+2) RunTests:
+- Validate that your %JAVA_HOME% is configured with the jdk path (java 8 or later) and it's added in the variable %PATH%;
+- Run batch file "run_tests.bat" in project root folder (it should build, download dependencies-if needed and run tests);
+- You can run the tests with an eclipse or similar IDE with TestNG add-in installed (click in the src\test\resources\com\komoot\testng\xml\komoot_tests.xml)
+with right mouse button,  Run As, TestNG Suite;
+- You can open one of test files and run directly too using the IDE (src\test\java\com\komoot\tests) with right mouse button,  Run As, TestNG Test.
+
+3) Config
+- You can change browser config and url here: config\config.properties
+Chrome valid inputs: gc, googlechrome,chrome
+Firefox valid inputs: ff,firefox,mozillafirefox
+
+4) Test Scenarios:
+- Please check Komoot.feature (src\test\resources\features\).
+
+5) Knew Issues
+- If you have some issue with the webdrivers you may go to webdriver folder in .m2\repository\webdriver and delete it to force new download.
+

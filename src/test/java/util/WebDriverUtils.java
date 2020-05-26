@@ -17,6 +17,7 @@ import io.appium.java_client.functions.ExpectedCondition;
 public final class WebDriverUtils {
 
 	private static final long MINIMAL_WAIT = 1000; //millis
+	private static final long CLEAR_WAIT = 3000; //millis
 	private static final long TIMEOUT = 30; // seconds
 	private static final long POLLING_TIMEOUT = 3; //seconds
 
@@ -61,7 +62,7 @@ public final class WebDriverUtils {
 		return null;
 	}
 
-	public static WebElement waitElementBeVisible(WebDriver driver, WebElement element) {
+	public static WebElement waitForElementBeVisible(WebDriver driver, WebElement element) {
 		if (waitForLoad(driver)) {
 			element = getWaitInstance(driver).until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOf(element)));
 			getActionsInstance(driver).moveToElement(element).perform();
@@ -71,8 +72,8 @@ public final class WebDriverUtils {
 		return null;
 	}
 
-	public static WebElement waitForElementToBeClickable(WebDriver driver, WebElement element) {
-		if (waitElementBeVisible(driver, element) != null) {
+	public static WebElement waitForElementBeClickable(WebDriver driver, WebElement element) {
+		if (waitForElementBeVisible(driver, element) != null) {
 			element =  getWaitInstance(driver).until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(element)));
 			getActionsInstance(driver).moveToElement(element).perform();
 			return element;
@@ -116,13 +117,13 @@ public final class WebDriverUtils {
 
 	public static void click(WebDriver driver, WebElement element) {
 		sleep(MINIMAL_WAIT);
-		element = waitForElementToBeClickable(driver, element);
+		element = waitForElementBeClickable(driver, element);
 		element.click();
 	}
 
 	public static void click2(WebDriver driver, WebElement element) {
 		sleep(MINIMAL_WAIT);
-		element = waitForElementToBeClickable(driver, element);
+		element = waitForElementBeClickable(driver, element);
 		getActionsInstance(driver).moveToElement(element).click(element).build().perform();
 	}
 
@@ -133,25 +134,43 @@ public final class WebDriverUtils {
 
 	public static void contextClick(WebDriver driver, WebElement element) {
 		sleep(MINIMAL_WAIT);
+		element = waitForElementBeClickable(driver, element);
 		getActionsInstance(driver).moveToElement(element).contextClick(element).build().perform();
 	}
 
 	public static void sendKeys(WebDriver driver, WebElement element, String text) {
 		sleep(MINIMAL_WAIT);
-		element = waitElementBeVisible(driver, element);
+		element = waitForElementBeClickable(driver, element);
+		element.clear();
+		sleep(CLEAR_WAIT);
 		element.sendKeys(text);
 	}
 
-	public static void clearAndSendKeys(WebDriver driver, WebElement element, String text) {
+	public static void sendKeys2(WebDriver driver, WebElement element, String text) {
 		sleep(MINIMAL_WAIT);
-		element = waitElementBeVisible(driver, element);
+		element = waitForElementBeClickable(driver, element);
 		element.clear();
+		sleep(CLEAR_WAIT);
+		getActionsInstance(driver).sendKeys(element, text).build().perform();
+	}
+	
+	public static void sendKeysJs(WebDriver driver, WebElement element, String text) {
+		sleep(MINIMAL_WAIT);
+		element = waitForElementBeClickable(driver, element);
+		element.clear();
+		sleep(CLEAR_WAIT);
+		((JavascriptExecutor) driver).executeScript("arguments[0].value='"+ text +"';", element);
+	}
+	
+	public static void sendKeysNoClear(WebDriver driver, WebElement element, String text) {
+		sleep(MINIMAL_WAIT);
+		element = waitForElementBeClickable(driver, element);
 		element.sendKeys(text);
 	}
 
 	public static String getText(WebDriver driver, WebElement element) {
 		sleep(MINIMAL_WAIT);
-		element = waitElementBeVisible(driver, element);
+		element = waitForElementBeVisible(driver, element);
 		return element.getText().trim(); 
 	}
 }

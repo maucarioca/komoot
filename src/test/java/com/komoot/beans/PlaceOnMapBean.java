@@ -10,4 +10,5 @@ public class PlaceOnMapBean extends MasterBean {
 	public String getPlaceValue() {
 		return placeValue;
 	}
+
 }

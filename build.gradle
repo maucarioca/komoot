@@ -16,9 +16,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-
-compileJava.options.fork = true
-compileJava.options.forkOptions.executable = '%JAVA_HOME%'
+compileJava {
+  options.fork = true
+  // if you want to run pointing to other javac you must change this path
+  options.forkOptions.executable = "${System.properties['java.home']}/../bin/javac"
+}
 
 repositories {
     // Use jcenter for resolving dependencies.

@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.komoot.pageobjects.widgets.MenuBarWidget;
+import com.komoot.pageobjects.widgets.PlacesAndAdressesWidget;
 import com.komoot.pageobjects.widgets.PlacesOnMapWidget;
 
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -23,6 +24,9 @@ public class RoutePlannerPage extends MasterPage {
 	@FindBy(xpath = "//div[@class='o-list-ui o-list-ui--border o-list-ui--separator o-list-ui--flush-vertical']")
 	private PlacesOnMapWidget placesOnMapWidget;
 
+	@FindBy(xpath = "//ul[@class='o-list-ui o-list-ui--separator']")
+	private PlacesAndAdressesWidget placesOrAdressesWidget;
+
 	private RoutePlannerPage(WebDriver driver) {
 		super(driver);
 	}
@@ -34,11 +38,7 @@ public class RoutePlannerPage extends MasterPage {
 		}
 		return routePlannerPage; 
 	}
-	
-	public Boolean validatePlaceOnMapIsInList(String placeItem) {
-		return routePlannerPage.placesOnMapWidget.isPlaceInList(placeItem);
-	}
-	
+
 	public WebElement getTxtSearchForPlaceOrAddress() {
 		return txtSearchForPlaceOrAddress;
 	}
@@ -47,7 +47,11 @@ public class RoutePlannerPage extends MasterPage {
 		return menuBarWidget;
 	}
 
-	public PlacesOnMapWidget getPlacesOnMampWidget() {
+	public PlacesOnMapWidget getPlacesOnMapWidget()  {
 		return placesOnMapWidget;
+	}
+
+	public PlacesAndAdressesWidget getPlacesOrAdressesWidget() {
+		return placesOrAdressesWidget;
 	}
 }
