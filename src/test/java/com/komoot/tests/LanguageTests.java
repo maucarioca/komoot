@@ -23,7 +23,7 @@ public class LanguageTests extends MasterTests {
 
 	@DataProvider(name = "language_test_data_provider")
 	public Iterator<LanguageBean> languageTestDataProvider() throws IOException, CsvException, NoSuchFieldException, SecurityException {
-		return getDataProviderContent("language_test_data.csv", new LanguageBean());
+		return getDataProviderContent("language_test_data_provider.csv", new LanguageBean());
 	}
 
 	@BeforeTest
@@ -37,7 +37,7 @@ public class LanguageTests extends MasterTests {
 		homePage.selectLanguage(languageBean.getLanguageValue());
 		assertThat(homePage.getPageCurrentUrl(), CoreMatchers.equalTo(languageBean.getExpectedUrl()));
 	}
-
+	
 	@AfterTest
 	public void tearDownTest(){
 		homePage = null;

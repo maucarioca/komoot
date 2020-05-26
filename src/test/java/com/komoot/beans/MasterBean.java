@@ -25,4 +25,5 @@ public abstract class MasterBean {
 	public String toString(){
 		return ToStringBuilder.reflectionToString(this);
 	}
+	
 }

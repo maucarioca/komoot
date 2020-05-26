@@ -20,11 +20,11 @@ public class PlacesOnMapWidget extends Widget {
 	public WebElement getPlaceInList (String placeItem) {
 		return placesOnMapItems.stream().filter(t -> t.getText().contentEquals(placeItem)).findFirst().orElse(null);
 	}
-	
-	public Boolean isPlaceInList (String placeItem) {
-		return placesOnMapItems.stream().filter(t -> t.getText().contentEquals(placeItem)).findFirst().isPresent();
+
+	public boolean checkPlaceInList(String placeItem) {
+		return placesOnMapItems.stream().anyMatch(t -> t.getText().contentEquals(placeItem));
 	}
-	
+
 	public List<String> getPlacesOnMapOptions() {
 		return placesOnMapItems.stream().map(t -> t.getText()).collect(Collectors.toList());
 	}
